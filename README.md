@@ -21,7 +21,6 @@ between all supported languages of the [Microsoft Cognitive Translation API](htt
 ## Quickstart / Running the code 
 * Follow [this guide](http://docs.microsofttranslator.com/text-translate.html) to create a cognitive services client in Azure
 * Create the file **Translate-Secrets.json** in your **My Documents** folder and paste in the Json structure at the bottom of this document. 
-* Replace the aaa's with the values from your azure account.
 
 
 ## Contributions welcome!
