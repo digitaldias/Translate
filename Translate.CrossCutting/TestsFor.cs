@@ -12,8 +12,22 @@ namespace Translate.CrossCutting
         {
             AutoMocker = new MoqAutoMocker<TEntity>();
 
+            OverrideMocks();
+
             Instance = AutoMocker.ClassUnderTest;
         }
+
+
+        public virtual void OverrideMocks(){
+        }
+
+
+        public void Inject<TContract>(TContract with) where TContract : class
+        {
+            AutoMocker.Container.Release(AutoMocker.Get<TContract>());
+            AutoMocker.Inject<TContract>(with);
+        }
+
 
 
         public Mock<TContract> GetMockFor<TContract>() where TContract : class
