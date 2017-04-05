@@ -1,26 +1,18 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using Translate.Domain.Contracts;
-using System;
-using System.IO;
 
 namespace Translate.Business
 {
     public class SettingsReader : ISettingsReader
     {
         private JObject _json;
+        private readonly ISettingsRepository _settingsRepository;
+        private readonly IExceptionHandler _exceptionHandler;
 
-
-        public SettingsReader()
+        public SettingsReader(ISettingsRepository settingsRepository, IExceptionHandler exceptionHandler)
         {
-                var specialFolder      = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                var pathToSettingsFile = Path.Combine(specialFolder, "Oversett secrets.json");
-
-                if (!File.Exists(pathToSettingsFile))
-                    throw new InvalidProgramException($"Did not find '{pathToSettingsFile}'. Please make sure it's there");
-
-            var fileContents = File.ReadAllText(pathToSettingsFile);
-            _json = JsonConvert.DeserializeObject<JObject>(fileContents);
+            _settingsRepository = settingsRepository;
+            _exceptionHandler = exceptionHandler;
         }
 
 
@@ -28,7 +20,7 @@ namespace Translate.Business
         {
             get
             {
-                return _json[name].Value<string>();
+                return _exceptionHandler.Run(() => _settingsRepository.GetFromUserDocuments(name));
             }
         }
     }

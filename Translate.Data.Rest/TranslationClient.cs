@@ -59,8 +59,9 @@ namespace Translate.Business
             var request = new RestRequest("Translate", Method.GET);
 
             request.AddParameter("appid", BearerToken);
+            request.AddParameter("from", from);
             request.AddParameter("to", to);
-            request.AddParameter("text", HttpUtility.UrlEncode(untranslated));
+            request.AddParameter("text", untranslated);
             
             request.AddHeader("accept", "application/xml");
 

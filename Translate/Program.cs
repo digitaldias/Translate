@@ -24,14 +24,18 @@ namespace Translate
                 return;
             }
 
-            Console.WriteLine("Passing empty parameters: " + _translationService.TranslateSingle("en", "no", ""));
-            Console.WriteLine($"Testing translation of Illegal languages: " + _translationService.TranslateSingle("en", "mø", "hound"));
+            var textToTranslate = string.Join(" ", args);
 
-            string untranslated = "Det var den beste av tider, det var den værste av tider";
-            var translated = XDocument.Parse(_translationService.TranslateSingle("no", "en", untranslated));
+            Console.WriteLine(textToTranslate);
+            Console.WriteLine(new string('-', 20));
 
-            Console.WriteLine("Translating");
-            Console.WriteLine(untranslated + "\n==>\n" + translated.Root.Value);
+            var translatedResult = XElement.Parse(_translationService.TranslateSingle("en", "no", textToTranslate));
+
+            var decoded = System.Web.HttpUtility.UrlDecode(translatedResult.Value);
+            Console.WriteLine(decoded);
+
+            Console.WriteLine();
+
 
             Console.WriteLine("Done");
         }

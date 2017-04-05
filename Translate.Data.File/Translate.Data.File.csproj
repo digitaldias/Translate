@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{946FC779-2FE5-40F7-8154-C05F8C0C3734}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>Translate</RootNamespace>
-    <AssemblyName>Translate</AssemblyName>
+    <ProjectGuid>{B6F7D637-5FCD-41E6-B690-9D80CD29DABB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Translate.Data.File</RootNamespace>
+    <AssemblyName>Translate.Data.File</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -35,12 +33,8 @@
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="StructureMap, Version=4.4.3.564, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\StructureMap.4.4.3\lib\net45\StructureMap.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,32 +43,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IoC\RuntimeRegistry.cs" />
-    <Compile Include="Logger.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="SettingsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Translate.Business\Translate.Business.csproj">
-      <Project>{fc7ccf7e-dff4-480a-92c6-ed18a14aee4d}</Project>
-      <Name>Translate.Business</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Translate.Data.File\Translate.Data.File.csproj">
-      <Project>{b6f7d637-5fcd-41e6-b690-9d80cd29dabb}</Project>
-      <Name>Translate.Data.File</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Translate.Data.Rest\Translate.Data.Rest.csproj">
-      <Project>{782daede-ac0a-41db-abb7-625dac9f789f}</Project>
-      <Name>Translate.Data.Rest</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Translate.Domain\Translate.Domain.csproj">
-      <Project>{4529b5c4-6940-436d-8e05-d19a6da2f448}</Project>
+      <Project>{4529B5C4-6940-436D-8E05-D19A6DA2F448}</Project>
       <Name>Translate.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -43,6 +43,7 @@
     <Compile Include="Contracts\IExceptionHandler.cs" />
     <Compile Include="Contracts\ILogger.cs" />
     <Compile Include="Contracts\ISettingsReader.cs" />
+    <Compile Include="Contracts\ISettingsRepository.cs" />
     <Compile Include="Contracts\ITranslationClient.cs" />
     <Compile Include="Contracts\ITranslationService.cs" />
     <Compile Include="Entities\Language.cs" />

@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Translate.CrossCutting", "T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Translate.Business.Tests", "Translate.Business.Tests\Translate.Business.Tests.csproj", "{EC017347-E671-45A4-AF8C-92205AA79FCC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Translate.Data.File", "Translate.Data.File\Translate.Data.File.csproj", "{B6F7D637-5FCD-41E6-B690-9D80CD29DABB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{EC017347-E671-45A4-AF8C-92205AA79FCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC017347-E671-45A4-AF8C-92205AA79FCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC017347-E671-45A4-AF8C-92205AA79FCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6F7D637-5FCD-41E6-B690-9D80CD29DABB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6F7D637-5FCD-41E6-B690-9D80CD29DABB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6F7D637-5FCD-41E6-B690-9D80CD29DABB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6F7D637-5FCD-41E6-B690-9D80CD29DABB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,5 +72,6 @@ Global
 		{782DAEDE-AC0A-41DB-ABB7-625DAC9F789F} = {E2CAA200-750B-4A80-9DA0-E3A37E2A2CFC}
 		{13D33F8C-6250-45CE-9A8F-1D90498E130C} = {3F1BFA75-937B-4CDB-93EC-25FD800DBC2A}
 		{EC017347-E671-45A4-AF8C-92205AA79FCC} = {A3138B7C-1E18-4773-B69E-46854B0224B1}
+		{B6F7D637-5FCD-41E6-B690-9D80CD29DABB} = {E2CAA200-750B-4A80-9DA0-E3A37E2A2CFC}
 	EndGlobalSection
 EndGlobal
