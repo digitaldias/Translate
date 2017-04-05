@@ -2,11 +2,12 @@
 This repository defines  the **TranslationService** and includes a sample console application to translate text
 between all supported languages of the [Microsoft Cognitive Translation API](https://www.microsoft.com/cognitive-services/en-us/translator-api)
 
-**TranslationService** automatically requests a new authentication token every 9 minutes, and performs the Microsoft Translation API calls masking away the details of each REST invocation.
+**TranslationService** automatically requests a new authentication token every 9 minutes (Translate API provides a 10-minute token), and performs the Microsoft Translation API calls masking away the details of each REST invocation.<br />
+The list of API methods can be found [here](http://docs.microsofttranslator.com/text-translate.html#!/default).
 
 ## TranslationService Details
 ### Methods and properties
-<pre>public string TranslateSingle(string from, string to, string text)</pre>
+<pre>public string TranslateSingle(Language from, Language to, string text)</pre>
 <pre>public IEnumerable&lt;Language&gt; SupportedLanguages { get; }</pre>
 
 ### Entities
