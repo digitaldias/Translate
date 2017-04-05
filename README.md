@@ -24,10 +24,6 @@ between all supported languages of the [Microsoft Cognitive Translation API](htt
 * Replace the aaa's with the values from your azure account.
 
 
-## Sample code
-
-
-
 ## Contributions welcome!
 I'm happy to accept any contributions to make this wrapper as useful as possible! The more, the merrier!
 A couple of notes: 
