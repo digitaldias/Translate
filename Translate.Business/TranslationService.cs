@@ -34,7 +34,7 @@ namespace Translate.Business
         }
 
 
-        public IEnumerable<Language> GetLanguageNames()
+        private IEnumerable<Language> GetLanguageNames()
         {
             return _exceptionHandler.Run(() => _translationClient.GetLanguageNames());
         }
