@@ -1,7 +1,11 @@
-﻿namespace Oversett.Domain.Contracts
+﻿using System.Collections.Generic;
+using Oversett.Domain.Entities;
+
+namespace Oversett.Domain.Contracts
 {
     public interface ITranslationClient
     {
-        string TranslateSingle(string untranslated, string from, string to);
+        string TranslateSingle(string from, string to, string untranslated);
+        IEnumerable<Language> GetLanguageNames();
     }
 }

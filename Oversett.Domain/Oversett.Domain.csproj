@@ -45,6 +45,7 @@
     <Compile Include="Contracts\ISettingsReader.cs" />
     <Compile Include="Contracts\ITranslationClient.cs" />
     <Compile Include="Contracts\ITranslationService.cs" />
+    <Compile Include="Entities\Language.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
