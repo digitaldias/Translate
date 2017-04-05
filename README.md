@@ -61,6 +61,20 @@ provided implementation
 In the project, the console application is named **Translate.exe** so there is a corresponding<br />
 ***Translate-Secrets.Json*** in my **My Documents** folder
 
+## Attributions
+The following external nuGet packages are part of the solution:
+
+| Nuget Package                                                                                 | Purpose                           |
+| -------------                                                                                 | -------                           |
+| [StructureMap](http://www.nuget.org/packages/StructureMap/)                                   | IoC Container                     | 
+| [StructureMap.AutoMocking.Moq](http://www.nuget.org/packages/structuremap.automocking.moq/)   | For baseclass in unit-testing     | 
+| [Moq](http://www.nuget.org/packages/Moq/)                                                     | My favourite mocking framework    |
+| [Should](http://www.nuget.org/packages/Should/)                                               | For writing fluent assertions     |
+| [NewtonSoft.Json](https://www.nuget.org/packages/Newtonsoft.Json)                             | For working with Json             |
+| [xUnit](http://www.nuget.org/packages/xunit/)                                                 | Unit testing framework            |
+| [RestSharp](http://www.nuget.org/packages/RestSharp/)                                         | for performing restful operations |
+
+
 ## Resources
 
 Contents of Translate-Secrets.json:
