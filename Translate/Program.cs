@@ -1,11 +1,11 @@
-﻿using Oversett.Domain.Contracts;
-using Oversett.IoC;
+﻿using Translate.Domain.Contracts;
+using Translate.IoC;
 using StructureMap;
 using System;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace Oversett
+namespace Translate
 {
     class Program
     {

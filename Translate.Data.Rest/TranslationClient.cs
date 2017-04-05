@@ -1,14 +1,14 @@
-﻿using Oversett.Domain.Contracts;
+﻿using Translate.Domain.Contracts;
 using RestSharp;
 using RestSharp.Extensions.MonoHttp;
 using System.Threading;
-using Oversett.Domain.Entities;
+using Translate.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Linq;
 
-namespace Oversett.Business
+namespace Translate.Business
 {
     public class TranslationClient : ITranslationClient
     {

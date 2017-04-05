@@ -1,6 +1,6 @@
 ﻿using StructureMap;
 
-namespace Oversett.IoC
+namespace Translate.IoC
 {
     public class RuntimeRegistry : Registry
     {

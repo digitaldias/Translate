@@ -1,10 +1,10 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Oversett.Domain.Contracts;
+using Translate.Domain.Contracts;
 using System;
 using System.IO;
 
-namespace Oversett.Business
+namespace Translate.Business
 {
     public class SettingsReader : ISettingsReader
     {

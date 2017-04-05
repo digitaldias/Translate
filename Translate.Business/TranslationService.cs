@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Oversett.Domain.Contracts;
-using Oversett.Domain.Entities;
+using Translate.Domain.Contracts;
+using Translate.Domain.Entities;
 using System.Linq;
 
-namespace Oversett.Business
+namespace Translate.Business
 {
     public class TranslationService : ITranslationService
     {

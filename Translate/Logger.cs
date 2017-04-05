@@ -1,7 +1,7 @@
-﻿using Oversett.Domain.Contracts;
+﻿using Translate.Domain.Contracts;
 using System;
 
-namespace Oversett
+namespace Translate
 {
     public class Logger : ILogger
     {

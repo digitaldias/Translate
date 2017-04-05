@@ -1,7 +1,7 @@
-﻿using Oversett.Domain.Contracts;
+﻿using Translate.Domain.Contracts;
 using System;
 
-namespace Oversett.Business
+namespace Translate.Business
 {
     public class ExceptionHandler : IExceptionHandler
     {

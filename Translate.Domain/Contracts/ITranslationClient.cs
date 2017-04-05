@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Oversett.Domain.Entities;
+using Translate.Domain.Entities;
 
-namespace Oversett.Domain.Contracts
+namespace Translate.Domain.Contracts
 {
     public interface ITranslationClient
     {

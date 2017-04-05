@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Oversett.Domain.Contracts
+namespace Translate.Domain.Contracts
 {
     public interface IExceptionHandler
     {

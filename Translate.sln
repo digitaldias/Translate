@@ -1,10 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.10
+VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oversett", "Oversett\Oversett.csproj", "{946FC779-2FE5-40F7-8154-C05F8C0C3734}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "10 Presentation Layer", "10 Presentation Layer", "{71C35A27-5680-4F54-9E0D-DA437A3BC174}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "20 Business Layer", "20 Business Layer", "{A3138B7C-1E18-4773-B69E-46854B0224B1}"
@@ -13,11 +11,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "30 Domain Layer", "30 Domai
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "40 Data Layer", "40 Data Layer", "{E2CAA200-750B-4A80-9DA0-E3A37E2A2CFC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oversett.Business", "Oversett.Business\Oversett.Business.csproj", "{FC7CCF7E-DFF4-480A-92C6-ED18A14AEE4D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Translate", "Translate\Translate.csproj", "{946FC779-2FE5-40F7-8154-C05F8C0C3734}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oversett.Domain", "Oversett.Domain\Oversett.Domain.csproj", "{4529B5C4-6940-436D-8E05-D19A6DA2F448}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Translate.Business", "Translate.Business\Translate.Business.csproj", "{FC7CCF7E-DFF4-480A-92C6-ED18A14AEE4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oversett.Data.Rest", "Oversett.Data.Rest\Oversett.Data.Rest.csproj", "{782DAEDE-AC0A-41DB-ABB7-625DAC9F789F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Translate.Domain", "Translate.Domain\Translate.Domain.csproj", "{4529B5C4-6940-436D-8E05-D19A6DA2F448}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Translate.Data.Rest", "Translate.Data.Rest\Translate.Data.Rest.csproj", "{782DAEDE-AC0A-41DB-ABB7-625DAC9F789F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

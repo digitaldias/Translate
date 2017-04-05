@@ -1,4 +1,4 @@
-﻿namespace Oversett.Domain.Entities
+﻿namespace Translate.Domain.Entities
 {
     public class Language
     {
