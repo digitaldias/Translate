@@ -1,11 +1,9 @@
-﻿using Newtonsoft.Json.Linq;
-using Translate.Domain.Contracts;
+﻿using Translate.Domain.Contracts;
 
 namespace Translate.Business
 {
     public class SettingsReader : ISettingsReader
     {
-        private JObject _json;
         private readonly ISettingsRepository _settingsRepository;
         private readonly IExceptionHandler _exceptionHandler;
 
