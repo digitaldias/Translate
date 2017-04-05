@@ -23,24 +23,6 @@ namespace Translate.Business
         }
 
 
-        public IEnumerable<Language> SupportedLanguages
-        {
-            get
-            {
-                if (_supportedLanguages == null)
-                    _supportedLanguages = new List<Language>(GetLanguageNames());
-
-                return _supportedLanguages;
-            }
-        }
-
-
-        private IEnumerable<Language> GetLanguageNames()
-        {
-            return _exceptionHandler.Run(() => _translationClient.GetLanguageNames());
-        }
-
-
         public string TranslateSingle(string from, string to, string text)
         {
             if (string.IsNullOrEmpty(from) || string.IsNullOrEmpty(to) || string.IsNullOrEmpty(text))
@@ -68,6 +50,29 @@ namespace Translate.Business
             });        
         }
 
-        
+
+        public string TranslateSingle(Language from, Language to, string text)
+        {
+            return _exceptionHandler.Run(() => _translationClient.TranslateSingle(from.Code, to.Code, text));
+        }
+
+
+        public IEnumerable<Language> SupportedLanguages
+        {
+            get
+            {
+                if (_supportedLanguages == null)
+                    _supportedLanguages = new List<Language>(GetLanguageNames());
+
+                return _supportedLanguages;
+            }
+        }
+
+
+        private IEnumerable<Language> GetLanguageNames()
+        {
+            return _exceptionHandler.Run(() => _translationClient.GetLanguageNames());
+        }
+
     }
 }
