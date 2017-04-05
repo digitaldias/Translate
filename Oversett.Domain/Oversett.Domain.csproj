@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{946FC779-2FE5-40F7-8154-C05F8C0C3734}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>Oversett</RootNamespace>
-    <AssemblyName>Oversett</AssemblyName>
+    <ProjectGuid>{4529B5C4-6940-436D-8E05-D19A6DA2F448}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Oversett.Domain</RootNamespace>
+    <AssemblyName>Oversett.Domain</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -32,12 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="StructureMap, Version=4.4.3.564, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\StructureMap.4.4.3\lib\net45\StructureMap.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -48,25 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IoC\RuntimeRegistry.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Contracts\IExceptionHandler.cs" />
+    <Compile Include="Contracts\ILogger.cs" />
+    <Compile Include="Contracts\ISettingsReader.cs" />
+    <Compile Include="Contracts\ITranslationClient.cs" />
+    <Compile Include="Contracts\ITranslationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TokenManager.cs" />
-    <Compile Include="Translator.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Oversett.Business\Oversett.Business.csproj">
-      <Project>{FC7CCF7E-DFF4-480A-92C6-ED18A14AEE4D}</Project>
-      <Name>Oversett.Business</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Oversett.Domain\Oversett.Domain.csproj">
-      <Project>{4529b5c4-6940-436d-8e05-d19a6da2f448}</Project>
-      <Name>Oversett.Domain</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
