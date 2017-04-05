@@ -53,7 +53,7 @@ namespace Translate.Business
 
         public string TranslateSingle(Language from, Language to, string text)
         {
-            return _exceptionHandler.Run(() => _translationClient.TranslateSingle(from.Code, to.Code, text));
+            return TranslateSingle(from.Code, to.Code, text);
         }
 
 
