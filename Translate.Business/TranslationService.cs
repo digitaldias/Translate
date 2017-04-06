@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using Translate.Domain.Contracts;
@@ -82,6 +83,15 @@ namespace Translate.Business
                 }
                 return _supportedLanguages;
             }
+        }
+
+
+        public IEnumerable<int> BreakSentences(Language textLanguage, string text)
+        {
+            if(textLanguage == null || string.IsNullOrEmpty(text))
+                return null;
+
+            return _exceptionHandler.Run(() => _translationClient.BreakSentences(textLanguage, text));
         }
 
 

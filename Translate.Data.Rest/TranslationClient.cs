@@ -59,7 +59,7 @@ namespace Translate.Business
             {
                 languages = new List<Language>(result.Data.Select(s => new Language { Code = s }));                
             }
-            return new List<Language>();
+            return languages;
         }
 
 
@@ -98,6 +98,23 @@ namespace Translate.Business
             return request;
         }
 
+
+        public IEnumerable<int> BreakSentences(Language language, string text)
+        {
+            var request = CreateAuthorizedRequest("/BreakSentences", Method.GET);
+            request.AddParameter("language", language.Code);
+            request.AddParameter("text", text);
+
+            var result = _restClientTranslation.Execute(request);
+            if (result.StatusCode == HttpStatusCode.OK)
+            {
+                var xmlParsed = XElement.Parse(result.Content);
+                foreach (var element in xmlParsed.Elements())
+                {
+                    yield return int.Parse(element.Value);
+                }
+            }            
+        }
 
         private string GetLanguageNames(string[] languageCodes)
         {

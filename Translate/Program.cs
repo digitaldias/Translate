@@ -36,10 +36,21 @@ namespace Translate
 
 
             // Detect a different language (Norwegian)
-            var detectedNorwegian = _translationService.DetectLanguage("Ja vi elsker dette landet som det stiger frem");
+            var norwegianAnthem = "Ja vi elsker dette landet som det stiger frem. Furet værbitt over vannet med de tusen hjem. Elsker, elsker det og tenker på vår far og mor.";
+            var detectedNorwegian = _translationService.DetectLanguage(norwegianAnthem);
             WriteAndResetStopwatch($"Detected language to be '{detectedNorwegian.Code}'");
 
-            
+
+            // Break up the sentences and return their character counts
+            var result = _translationService.BreakSentences(detectedNorwegian, norwegianAnthem);
+            WriteAndResetStopwatch("Sentences broken:");
+            int index = 1;
+            foreach(var sentence in result)
+            {
+                Console.WriteLine($"Sentence {index} contains {sentence} characters");
+            }
+
+
             // Detect the language of the text to translate from
             var detectedLanguage = _translationService.DetectLanguage(textToTranslate);
             WriteAndResetStopwatch($"Detected language to be '{detectedLanguage.Code}'");

@@ -7,13 +7,12 @@ namespace Translate.Domain.Contracts
     {
         Language DetectLanguage(string text);
 
-
         string TranslateSingle(string from, string to, string text);
-
 
         string TranslateSingle(Language from, Language to, string text);
 
-
         Dictionary<string,Language> SupportedLanguages { get; }
+
+        IEnumerable<int> BreakSentences(Language textLanguage, string text);
     }
 }

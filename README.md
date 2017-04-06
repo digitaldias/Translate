@@ -16,6 +16,9 @@ public Dictionary<string,Language> SupportedLanguages { get; }
 
 // Detect the language used in a chunk of text
 public Language DetectLanguage(string text)
+
+// Break a text up into sentences and then return the character length for each sentence
+public IEnumerable<int> BreakSentences(Language language, string text)
 ```
 
 ### Entities

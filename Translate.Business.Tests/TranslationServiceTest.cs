@@ -228,8 +228,54 @@ namespace Translate.Business.Tests
         }
 
 
-        private string EnglishPhrase => "It was the best of times, it was the worst of times";
+        [Fact]
+        public void BreakSentences_LanguageIsNull_ReturnsNull()
+        {
+            // Act           
+            var result = Instance.BreakSentences(null, EnglishPhrase);
 
+            // Assert
+            result.ShouldBeNull();
+        }
+
+
+
+        [Fact]
+        public void BreakSentences_ValidParameters_InvokesTranslationClient()
+        {
+            var englishLanguage = EnglishLanguage;
+            // Act           
+            var result = Instance.BreakSentences(englishLanguage, EnglishPhrase);
+
+            // Assert
+            GetMockFor<ITranslationClient>().Verify(c => c.BreakSentences(englishLanguage, EnglishPhrase), Times.Once());
+        }
+
+
+        [Fact]
+        public void BreakSentences_TextIsNull_ReturnsNull()
+        {
+            // Act           
+            var result = Instance.BreakSentences(EnglishLanguage, null);
+
+            // Assert
+            result.ShouldBeNull();
+        }
+
+
+        private string EnglishPhrase => "A Tale of Two Cities. It was the best of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness, it was the epoch of belief, it was the epoch of incredulity, it was the season of Light, it was the season of Darkness, it was the spring of hope, it was the winter of despair.";
+
+
+        private Language EnglishLanguage
+        {
+            get
+            {
+                return new Language
+                {
+                    Code = "en"
+                };
+            }
+        }
 
 
         private void SupportEnglishAndNorwegian()

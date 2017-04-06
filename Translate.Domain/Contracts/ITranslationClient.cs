@@ -17,5 +17,7 @@ namespace Translate.Domain.Contracts
         Language DetectLanguage(string text);
 
         Task<Language> DetectLanguageAsync(string text);
+
+        IEnumerable<int> BreakSentences(Language englishLanguage, string englishPhrase);
     }
 }
