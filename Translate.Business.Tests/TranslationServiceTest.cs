@@ -48,7 +48,7 @@ namespace Translate.Business.Tests
 
 
         [Fact]
-        public void TranslateSingle_FromIsEmpty_ResultIsEmptyString()
+        public void TranslateSingle_FromIsEmpty_ReturnsEmptyString()
         {
             // Act
             var result = Instance.TranslateSingle(null, "en", "yes we have no bananas");
@@ -59,7 +59,7 @@ namespace Translate.Business.Tests
 
 
         [Fact]
-        public void TranslateSingle_ToIsEmpty_ResultIsEmptyString()
+        public void TranslateSingle_ToIsEmpty_ReturnsEmptyString()
         {
             // Act
             var result = Instance.TranslateSingle("en", null, "yes we have no bananas");
@@ -70,7 +70,7 @@ namespace Translate.Business.Tests
 
 
         [Fact]
-        public void TranslateSingle_TextIsEmpty_ResultIsEmptyString()
+        public void TranslateSingle_TextIsEmpty_ReturnsEmptyString()
         {
             // Act
             var result = Instance.TranslateSingle("en", "no", null);
@@ -81,7 +81,7 @@ namespace Translate.Business.Tests
 
 
         [Fact]
-        public void TranslateSingle_FromIsInvalidLanguage_ResultIsEmptyString()
+        public void TranslateSingle_FromIsInvalidLanguage_ReturnsEmptyString()
         {
             // Arrange
             SupportEnglishAndNorwegian();
@@ -126,7 +126,7 @@ namespace Translate.Business.Tests
 
 
         [Fact]
-        public void TranslateSingle_ToIsInvalidLanguage_ResultIsEmptyString()
+        public void TranslateSingle_ToIsInvalidLanguage_ReturnsEmptyString()
         {
             // Arrange
             SupportEnglishAndNorwegian();
@@ -165,7 +165,5 @@ namespace Translate.Business.Tests
 
             GetMockFor<ITranslationClient>().Setup(o => o.GetLanguageNames()).Returns(supportedLanguages);
         }
-
-
     }
 }
