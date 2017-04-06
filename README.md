@@ -7,16 +7,25 @@ The list of API methods can be found [here](http://docs.microsofttranslator.com/
 
 ## TranslationService Details
 ### Methods and properties
-<pre>public string TranslateSingle(Language from, Language to, string text)</pre>
-<pre>public Dictionary&lt;string,Language&gt; SupportedLanguages { get; }</pre>
+```csharp
+// Translate text from one language to another
+public string TranslateSingle(Language from, Language to, string text)
+
+// Dictionary of supported languages, populated during startup
+public Dictionary<string,Language> SupportedLanguages { get; }
+
+// Detect the language used in a chunk of text
+public Language DetectLanguage(string text)
+```
 
 ### Entities
->```csharp
->   public class Language
->   {
->        public string Code { get; set; }
->    }
->```
+```csharp
+   public class Language
+   {
+        public string Name { get; set; }
+        public string Code { get; set; }
+   }
+```
 
 
 ## Quickstart / Running the code 
@@ -69,6 +78,7 @@ The following external nuGet packages are part of the solution:
 | [NewtonSoft.Json](https://www.nuget.org/packages/Newtonsoft.Json)                             | For working with Json             |
 | [xUnit](http://www.nuget.org/packages/xunit/)                                                 | Unit testing framework            |
 | [RestSharp](http://www.nuget.org/packages/RestSharp/)                                         | for performing restful operations |
+| [nBuilder](https://code.google.com/archive/p/nbuilder/)                                       | For rapid testdata creation       |
 
 
 ## Resources

@@ -5,6 +5,9 @@ namespace Translate.Domain.Contracts
 {
     public interface ITranslationService
     {
+        Language DetectLanguage(string text);
+
+
         string TranslateSingle(string from, string to, string text);
 
 

@@ -22,6 +22,18 @@ namespace Translate.Business
             _logger            = logger;
         }
 
+        public Language DetectLanguage(string text)
+        {
+            if(string.IsNullOrEmpty(text))
+                return null;
+
+            // API doesen't support detection of over 100 000 characters
+            if (text.Length > 100000)
+                text = text.Substring(0, 100000);
+
+            return  _exceptionHandler.Run(() => _translationClient.DetectLanguage(text));
+        }
+
 
         public string TranslateSingle(string from, string to, string text)
         {
@@ -78,6 +90,7 @@ namespace Translate.Business
         {
             return _exceptionHandler.Run(() => _translationClient.GetLanguageCodes());
         }
+
 
     }
 }

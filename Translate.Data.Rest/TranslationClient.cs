@@ -4,6 +4,8 @@ using System.Linq;
 using System.Net;
 using Translate.Domain.Contracts;
 using Translate.Domain.Entities;
+using System;
+using System.Xml.Linq;
 
 namespace Translate.Business
 {
@@ -56,10 +58,26 @@ namespace Translate.Business
         }
 
 
+        public Language DetectLanguage(string text)
+        {
+            var request = CreateAuthorizedRequest("Detect", Method.GET);
+            request.AddParameter("text", text);
+
+            var result = _restClientTranslation.Execute(request);
+            if (result.StatusCode == HttpStatusCode.OK)
+            {
+                var xml = XElement.Parse(result.Content);
+                return new Language { Code = xml.Value};
+            }
+            return null;
+        }
+
+
         private RestRequest CreateAuthorizedRequest(string resource, Method method)
         {
             var request = new RestRequest(resource, method);
             request.AddParameter("appid", _tokenRefresher.BearerToken);
+            
             return request;
         }
     }

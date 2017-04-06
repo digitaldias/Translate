@@ -27,23 +27,38 @@ namespace Translate
                 ShowSyntax();
                 return;
             }
+            var textToTranslate = string.Join(" ", args);
+
 
             // Output all supported languages
             var supportedLanguages = _translationService.SupportedLanguages;
-            WriteAndResetStopwatch($"Supported Languages:\n{string.Join(", ", supportedLanguages.Values.Select(l => l.Code))}");            
+            WriteAndResetStopwatch($"Supported Languages:\n{string.Join(", ", supportedLanguages.Values.Select(l => l.Code))}");
+
+
+            // Detect a different language (Norwegian)
+            var detectedNorwegian = _translationService.DetectLanguage("Ja vi elsker dette landet som det stiger frem");
+            WriteAndResetStopwatch($"Detected language to be '{detectedNorwegian.Code}'");
+
+            
+            // Detect the language of the text to translate from
+            var detectedLanguage = _translationService.DetectLanguage(textToTranslate);
+            WriteAndResetStopwatch($"Detected language to be '{detectedLanguage.Code}'");
+
 
             // Get text to translate from Project Debug arguments. 
             // The text is obtained from Samuel L. Ipsum generator
-            var textToTranslate = string.Join(" ", args);
             WriteAndResetStopwatch(textToTranslate);
 
-            // Translate from english to norwegian
-            var english          = supportedLanguages["en"];
+
+            // Translate into norwegian            
             var norwegian        = supportedLanguages["no"];
-            var translatedResult = _translationService.TranslateSingle(from: english, to: norwegian, text: textToTranslate);            
+            var translatedResult = _translationService.TranslateSingle(from: detectedLanguage, to: norwegian, text: textToTranslate);            
             WriteAndResetStopwatch(translatedResult);
 
-            Console.WriteLine("Done");
+
+            // End of program
+            Console.WriteLine("Done. Press any key to finish");
+            Console.ReadKey();
         }
 
 

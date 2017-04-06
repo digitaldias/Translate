@@ -4,6 +4,8 @@ using Translate.Domain.Contracts;
 using Xunit;
 using Should;
 using Translate.Domain.Entities;
+using FizzWare.NBuilder;
+using System;
 
 namespace Translate.Business.Tests
 {
@@ -157,6 +159,78 @@ namespace Translate.Business.Tests
             // Assert
             result.ShouldEqual("ja vi mangler bananer");
         }
+
+
+        [Fact]
+        public void DetectLanguage_TextIsNull_ReturnsNull()
+        {
+            // Act
+            var result = Instance.DetectLanguage(null);
+
+            // Assert
+            result.ShouldBeNull();
+        }
+
+
+        [Fact]
+        public void DetectLanguage_EnglishPhrase_ReturnsEnglishLanguage()
+        {
+            // Act
+            Instance.DetectLanguage(EnglishPhrase);
+
+            // Assert
+            GetMockFor<ITranslationClient>().Verify(c => c.DetectLanguage(EnglishPhrase), Times.Once());
+        }
+
+
+        [Fact]
+        public void DetectLanguage_TextIsNull_DoesNotInvokeRestClient()
+        {
+            // Arrange
+            string nullString = null;
+
+            // Act
+            var result = Instance.DetectLanguage(nullString);
+
+            // Assert
+            GetMockFor<ITranslationClient>().Verify(c => c.DetectLanguage(nullString), Times.Never());
+        }
+
+
+
+        [Fact]
+        public void DetectLanguage_ClientThrowsException_IsHandledByExceptionHandler()
+        {
+            // Arrange            
+            var badException = new Exception("I'm bad");
+            GetMockFor<ITranslationClient>().Setup(c => c.DetectLanguage(EnglishPhrase)).Throws(badException);
+
+            // Act           
+            var result = Instance.DetectLanguage(EnglishPhrase);
+
+            // Assert
+            // By asserting that the logger is called, we KNOW that the exceptionHandler is running this 
+            GetMockFor<ILogger>().Verify(l => l.LogException(badException), Times.Once());
+        }
+
+
+        [Fact]
+        public void DetectLanguage_TextIsOver100000Characters_TextIsTrimmedTo100000Characters()
+        {
+            // Arrange
+            var random = new RandomGenerator();
+            var longText = random.Phrase(120000);
+
+            // Act
+            var result = Instance.DetectLanguage(longText);
+
+            // Assert
+            GetMockFor<ITranslationClient>().Verify(c => c.DetectLanguage(It.Is<string>(text => text.Length == 100000)));
+        }
+
+
+        private string EnglishPhrase => "It was the best of times, it was the worst of times";
+
 
 
         private void SupportEnglishAndNorwegian()
