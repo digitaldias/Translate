@@ -29,5 +29,22 @@ namespace Translate.Business
             }                
             return default(TResult);
         }
+
+
+        public void Execute(Action unsafeAction)
+        {
+            if (unsafeAction != null)
+            {
+                try
+                {
+                    unsafeAction.Invoke();
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogException(ex);
+                }
+            }            
+        }
+
     }
 }

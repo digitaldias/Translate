@@ -30,7 +30,7 @@ namespace Translate
 
             // Output all supported languages
             var supportedLanguages = _translationService.SupportedLanguages;
-            WriteAndResetStopwatch($"Supported Languages:\n{string.Join(", ", supportedLanguages.Select(l => l.Code))}");            
+            WriteAndResetStopwatch($"Supported Languages:\n{string.Join(", ", supportedLanguages.Values.Select(l => l.Code))}");            
 
             // Get text to translate from Project Debug arguments. 
             // The text is obtained from Samuel L. Ipsum generator
@@ -38,8 +38,8 @@ namespace Translate
             WriteAndResetStopwatch(textToTranslate);
 
             // Translate from english to norwegian
-            var english          = supportedLanguages.FirstOrDefault(o => o.Code.Equals("en"));
-            var norwegian        = supportedLanguages.FirstOrDefault(o => o.Code.Equals("no"));
+            var english          = supportedLanguages["en"];
+            var norwegian        = supportedLanguages["no"];
             var translatedResult = _translationService.TranslateSingle(from: english, to: norwegian, text: textToTranslate);            
             WriteAndResetStopwatch(translatedResult);
 

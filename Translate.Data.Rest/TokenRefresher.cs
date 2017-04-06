@@ -1,4 +1,5 @@
 ﻿using RestSharp;
+using System.Net;
 using System.Threading;
 using Translate.Domain.Contracts;
 
@@ -36,13 +37,11 @@ namespace Translate.Data.Rest
 
             _authorizationToken = string.Empty;
             var request         = new RestRequest("issueToken", Method.POST);
-            var subscriptionKey = _settingsReader["Translator:AccountKey"];
 
-            request.AddHeader("Ocp-Apim-Subscription-Key", subscriptionKey);
+            request.AddHeader("Ocp-Apim-Subscription-Key", _settingsReader["Translator:AccountKey"]);
 
             var response = _restClientCognitive.Execute(request);
-
-            if (response.ResponseStatus == ResponseStatus.Completed)
+            if (response.StatusCode == HttpStatusCode.OK)
             {
                 _authorizationToken = response.Content;
                 _bearerToken        = "Bearer " + _authorizationToken;
