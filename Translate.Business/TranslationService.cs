@@ -28,8 +28,8 @@ namespace Translate.Business
                 return null;
 
             // API doesen't support detection of over 100 000 characters
-            if (text.Length > 100000)
-                text = text.Substring(0, 100000);
+            if (text.Length > 100_000)
+                text = text.Substring(0, 100_000);
 
             return  _exceptionHandler.Run(() => _translationClient.DetectLanguage(text));
         }

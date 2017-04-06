@@ -218,13 +218,13 @@ namespace Translate.Business.Tests
         {
             // Arrange
             var random = new RandomGenerator();
-            var longText = random.Phrase(120000);
+            var longText = random.Phrase(120_000);
 
             // Act
             var result = Instance.DetectLanguage(longText);
 
             // Assert
-            GetMockFor<ITranslationClient>().Verify(c => c.DetectLanguage(It.Is<string>(text => text.Length == 100000)));
+            GetMockFor<ITranslationClient>().Verify(c => c.DetectLanguage(It.Is<string>(text => text.Length == 100_000)));
         }
 
 
