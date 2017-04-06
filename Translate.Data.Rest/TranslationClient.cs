@@ -54,10 +54,10 @@ namespace Translate.Business
         {
             var request = CreateAuthorizedRequest("GetLanguagesForTranslate", Method.GET);            
             var result  = _restClientTranslation.Execute<List<string>>(request);
-
+            var languages = new List<Language>();
             if (result.StatusCode == HttpStatusCode.OK)
             {
-                return result.Data.Select(s => new Language { Code = s });                
+                languages = new List<Language>(result.Data.Select(s => new Language { Code = s }));                
             }
             return new List<Language>();
         }
@@ -96,6 +96,23 @@ namespace Translate.Business
             request.AddParameter("appid", _tokenRefresher.BearerToken);
             
             return request;
+        }
+
+
+        private string GetLanguageNames(string[] languageCodes)
+        {
+            var newClient = new RestClient("https://api.microsofttranslator.com/v2/http.svc");
+            var request = CreateAuthorizedRequest("/GetLanguageNames", Method.POST);
+            request.AddParameter("locale", "no");
+            request.AddParameter("languageCodes", "en,no,fr");
+            
+
+            var response = newClient.Execute(request);
+            if(response.StatusCode == HttpStatusCode.OK)
+            {
+                return response.Content;
+            }
+            return string.Empty;
         }
     }
 }
