@@ -6,10 +6,10 @@ namespace Translate.Domain.Contracts
     public interface ITranslationService
     {
         /// <summary>
-        /// Provide a way to detect what language the given text is written in
+        /// Detect what language the given text is written in
         /// </summary>
         /// <param name="text">The text to do language detection on</param>
-        /// <returns></returns>
+        /// <returns>The corresponding Language object</returns>
         Language DetectLanguage(string text);
 
 
@@ -19,7 +19,7 @@ namespace Translate.Domain.Contracts
         /// <param name="from">Language to translate from</param>
         /// <param name="to">Language to translate to</param>
         /// <param name="text">the text to be translated</param>
-        /// <returns></returns>
+        /// <returns>Translated string</returns>
         string TranslateSingle(Language from, Language to, string text);
 
 
@@ -35,7 +35,7 @@ namespace Translate.Domain.Contracts
         /// </summary>
         /// <param name="textLanguage">The language of the provided text</param>
         /// <param name="text">The text to analyze</param>
-        /// <returns></returns>
+        /// <returns>Enumerable of ints where each represents the character length of each sentence</returns>
         IEnumerable<int> BreakSentences(Language textLanguage, string text);
 
 
