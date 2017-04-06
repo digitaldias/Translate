@@ -8,7 +8,7 @@ The list of API methods can be found [here](http://docs.microsofttranslator.com/
 ## TranslationService Details
 ### Methods and properties
 <pre>public string TranslateSingle(Language from, Language to, string text)</pre>
-<pre>public IEnumerable&lt;Language&gt; SupportedLanguages { get; }</pre>
+<pre>public Dictionary&lt;string,Language&gt; SupportedLanguages { get; }</pre>
 
 ### Entities
 >```csharp
