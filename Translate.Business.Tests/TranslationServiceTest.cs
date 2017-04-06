@@ -261,21 +261,116 @@ namespace Translate.Business.Tests
             // Assert
             result.ShouldBeNull();
         }
+        
+
+        [Fact]
+        public void AddTranslation_LanguageFromIsNull_ReturnsFalse()
+        {
+            // Arrange            
+
+            // Act           
+            var result = Instance.AddTranslation(null, EnglishLanguage, EnglishPhrase, NorwegianPhrase, Someone);
+
+            // Assert
+            result.ShouldBeFalse();
+        }
+
+
+
+        [Fact]
+        public void AddTranslation_AllParametersValid_ResultIsTrue()
+        {
+            // Arrange            
+            AddTranslationClientWillReturnTrue();            
+
+            // Act           
+            var result = Instance.AddTranslation(EnglishLanguage, NorwegianLanguage, EnglishPhrase, NorwegianPhrase, Someone);
+
+            // Assert
+            result.ShouldBeTrue();
+        }
+
+
+        [Fact]
+        public void AddTranslation_AllParametersValid_InvokesTranslationClient()
+        {
+            // Arrange            
+            var english              = EnglishLanguage;
+            var norsk                = NorwegianLanguage;
+            var englishText          = EnglishPhrase;
+            var norwegianTranslation = NorwegianPhrase;
+            var user                 = Someone;
+
+            // Act           
+            var result = Instance.AddTranslation(english, norsk, englishText, norwegianTranslation, user);
+
+            // Assert
+            GetMockFor<ITranslationClient>().Verify(c => c.AddTranslation(english, norsk, englishText, norwegianTranslation, user), Times.Once());
+        }
+
+
+        [Fact]
+        public void AddTranslation_OriginalTextTooLong_ReturnsFalse()
+        {
+            // Arrange  
+            AddTranslationClientWillReturnTrue();
+
+            var random = new RandomGenerator();
+            var english = EnglishLanguage;
+            var norsk = NorwegianLanguage;
+            var englishText = random.Phrase(1010);
+            var norwegianTranslation = NorwegianPhrase;
+
+            // Act           
+            var result = Instance.AddTranslation(english, norsk, englishText, norwegianTranslation, Someone);
+
+            // Assert
+            result.ShouldBeFalse();
+        }
+
+
+        [Fact]
+        public void AddTranslation_TranslatedTextTooLong_ReturnsFalse()
+        {
+            // Arrange  
+            AddTranslationClientWillReturnTrue();
+
+            var random = new RandomGenerator();
+            var english = EnglishLanguage;
+            var norsk = NorwegianLanguage;
+            var englishText = EnglishPhrase;
+            var norwegianTranslation = random.Phrase(2020);
+
+            // Act           
+            var result = Instance.AddTranslation(english, norsk, englishText, norwegianTranslation, Someone);
+
+            // Assert
+            result.ShouldBeFalse();
+        }
+
+
+
+        #region HELPER METHODS AND PROPERTIES 
+
+        private string Someone => "someone@somewhere.com";
+
+
+        private void AddTranslationClientWillReturnTrue()
+        {
+            GetMockFor<ITranslationClient>().Setup(c => c.AddTranslation(It.IsAny<Language>(), It.IsAny<Language>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).Returns(true);
+        }
 
 
         private string EnglishPhrase => "A Tale of Two Cities. It was the best of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness, it was the epoch of belief, it was the epoch of incredulity, it was the season of Light, it was the season of Darkness, it was the spring of hope, it was the winter of despair.";
 
 
-        private Language EnglishLanguage
-        {
-            get
-            {
-                return new Language
-                {
-                    Code = "en"
-                };
-            }
-        }
+        private string NorwegianPhrase => "En historie om to byer. Det var den beste av tider, det var den værste av tider, det var en alder av visdom, det var en alder for dumhet, det var en epoke med vantro, det var lysets sesong, det var mørkets sesong, det var håpets vår, det var vinteren for desperasjon.";
+
+
+        private Language EnglishLanguage => new Language{ Code = "en" };
+
+
+        private Language NorwegianLanguage => new Language{ Code = "no" };
 
 
         private void SupportEnglishAndNorwegian()
@@ -284,5 +379,7 @@ namespace Translate.Business.Tests
 
             GetMockFor<ITranslationClient>().Setup(o => o.GetLanguageCodes()).Returns(supportedLanguages);
         }
+
+        #endregion
     }
 }

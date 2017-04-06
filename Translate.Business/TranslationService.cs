@@ -95,6 +95,41 @@ namespace Translate.Business
         }
 
 
+        public bool AddTranslation(Language from, Language to, string originalText, string translatedText, string userName)
+        {
+            if (from == null || to == null)
+            {
+                _logger.LogError("FROM and TO languages cannot be null. They're both required");
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(originalText) || string.IsNullOrEmpty(translatedText))
+            {
+                _logger.LogError("Input texts cannot be empty");
+                return false;
+            }
+
+            if(string.IsNullOrEmpty(userName))
+            {
+                _logger.LogError("The userName cannot be null");
+                return false;
+            }
+
+            if (originalText.Length > 1000)
+            {
+                _logger.LogError("Original text cannot exceed 1000 characters");
+                return false;
+            }
+
+            if (translatedText.Length > 2000)
+            {
+                _logger.LogError("Translated text cannot exceed 2000 characters");
+                return false;
+            }
+            return _exceptionHandler.Run(() => _translationClient.AddTranslation(from, to, originalText, translatedText, userName));
+        }
+
+
         private IEnumerable<Language> GetLanguageCodes()
         {
             return _exceptionHandler.Run(() => _translationClient.GetLanguageCodes());

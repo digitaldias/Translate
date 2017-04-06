@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using Translate.Domain.Contracts;
 using Translate.Domain.Entities;
+using System;
 
 namespace Translate.Business
 {
@@ -115,6 +116,28 @@ namespace Translate.Business
                 }
             }            
         }
+
+
+        public bool AddTranslation(Language from, Language to, string untranslated, string translated, string userName)
+        {
+            var request = CreateAuthorizedRequest("/AddTranslation", Method.GET);
+            request.AddParameter("originalText", untranslated);
+            request.AddParameter("translatedText", translated);
+            request.AddParameter("from", from.Code);
+            request.AddParameter("to", to.Code);
+            request.AddParameter("user", userName);
+
+            var result = _restClientTranslation.Execute(request);
+            if (result.StatusCode == HttpStatusCode.OK)
+                return true;
+
+            var xmlElement = XElement.Parse(result.Content);
+            var errorMessage = xmlElement.Descendants().First(n => n.Name == "p" && n.Value.StartsWith("Message:")).Value;
+            _logger.LogError(errorMessage);
+
+            return false;
+        }
+
 
         private string GetLanguageNames(string[] languageCodes)
         {
