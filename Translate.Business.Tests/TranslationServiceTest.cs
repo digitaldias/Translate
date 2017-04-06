@@ -31,7 +31,7 @@ namespace Translate.Business.Tests
             var result = Instance.SupportedLanguages;
 
             // Assert
-            GetMockFor<ITranslationClient>().Verify(o => o.GetLanguageNames(), Times.Once());                
+            GetMockFor<ITranslationClient>().Verify(o => o.GetLanguageCodes(), Times.Once());                
         }
 
 
@@ -43,7 +43,7 @@ namespace Translate.Business.Tests
             var result2 = Instance.SupportedLanguages;
 
             // Assert
-            GetMockFor<ITranslationClient>().Verify(o => o.GetLanguageNames(), Times.Once());
+            GetMockFor<ITranslationClient>().Verify(o => o.GetLanguageCodes(), Times.Once());
         }
 
 
@@ -163,7 +163,7 @@ namespace Translate.Business.Tests
         {
             var supportedLanguages = new Language[] { new Language { Code = "no"}, new Language { Code = "en"} };
 
-            GetMockFor<ITranslationClient>().Setup(o => o.GetLanguageNames()).Returns(supportedLanguages);
+            GetMockFor<ITranslationClient>().Setup(o => o.GetLanguageCodes()).Returns(supportedLanguages);
         }
     }
 }

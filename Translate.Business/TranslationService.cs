@@ -68,24 +68,15 @@ namespace Translate.Business
 
                     foreach (var languageCode in languageCodes)
                         _supportedLanguages[languageCode.Code] = languageCode;
-
-                    EnrichWithLanguageNames();
                 }
-
                 return _supportedLanguages;
             }
         }
 
 
-        private void EnrichWithLanguageNames()
-        {
-            _exceptionHandler.Execute(() => _translationClient.EnrichCodesWithNames(_supportedLanguages.Values));
-        }
-
-
         private IEnumerable<Language> GetLanguageCodes()
         {
-            return _exceptionHandler.Run(() => _translationClient.GetLanguageNames());
+            return _exceptionHandler.Run(() => _translationClient.GetLanguageCodes());
         }
 
     }
