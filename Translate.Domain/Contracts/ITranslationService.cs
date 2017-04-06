@@ -11,6 +11,6 @@ namespace Translate.Domain.Contracts
         string TranslateSingle(Language from, Language to, string text);
 
 
-        IEnumerable<Language> SupportedLanguages { get; }
+        Dictionary<string,Language> SupportedLanguages { get; }
     }
 }

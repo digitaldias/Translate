@@ -145,17 +145,17 @@ namespace Translate.Business.Tests
         {
             // Arrange
             SupportEnglishAndNorwegian();
-            var from = "en";
-            var to = "no";
+            var from = new Language { Code = "en" };
+            var to = new Language { Code = "no" };
             var text = "yes we have no bananas";
-            var translated = "ja vi mangler bananer";
-            GetMockFor<ITranslationClient>().Setup(c => c.TranslateSingle(from, to, text)).Returns(translated);
+            var translated = "<result>ja vi mangler bananer</result>";
+            GetMockFor<ITranslationClient>().Setup(c => c.TranslateSingle(from.Code, to.Code, text)).Returns(translated);
 
             // Act
             var result = Instance.TranslateSingle(from, to, text);
 
             // Assert
-            result.ShouldEqual(translated);
+            result.ShouldEqual("ja vi mangler bananer");
         }
 
 

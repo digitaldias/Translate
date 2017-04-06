@@ -11,7 +11,7 @@ namespace Translate.Business
     {
         private readonly IExceptionHandler _exceptionHandler;
         private readonly ITranslationClient _translationClient;
-        private IEnumerable<Language> _supportedLanguages;
+        private Dictionary<string, Language> _supportedLanguages;
         private readonly ILogger _logger;
 
 
@@ -31,13 +31,13 @@ namespace Translate.Business
                 return string.Empty;
             }
 
-            if (!SupportedLanguages.Any(l => l.Code == from))
+            if (!SupportedLanguages.Values.Any(l => l.Code == from))
             {
                 _logger.LogError($"Paramameter 'from' used invalid language code '{from}'");
                 return string.Empty;
             }
 
-            if (!SupportedLanguages.Any(l => l.Code == to))
+            if (!SupportedLanguages.Values.Any(l => l.Code == to))
             {
                 _logger.LogError($"Paramameter 'to' used invalid language code '{to}'");
                 return string.Empty;
@@ -57,19 +57,33 @@ namespace Translate.Business
         }
 
 
-        public IEnumerable<Language> SupportedLanguages
+        public Dictionary<string, Language> SupportedLanguages
         {
             get
             {
                 if (_supportedLanguages == null)
-                    _supportedLanguages = new List<Language>(GetLanguageNames());
+                {
+                    var languageCodes = GetLanguageCodes();
+                    _supportedLanguages = new Dictionary<string, Language>();
+
+                    foreach (var languageCode in languageCodes)
+                        _supportedLanguages[languageCode.Code] = languageCode;
+
+                    EnrichWithLanguageNames();
+                }
 
                 return _supportedLanguages;
             }
         }
 
 
-        private IEnumerable<Language> GetLanguageNames()
+        private void EnrichWithLanguageNames()
+        {
+            _exceptionHandler.Execute(() => _translationClient.EnrichCodesWithNames(_supportedLanguages.Values));
+        }
+
+
+        private IEnumerable<Language> GetLanguageCodes()
         {
             return _exceptionHandler.Run(() => _translationClient.GetLanguageNames());
         }
