@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Translate.Domain.Contracts;
-using Translate.Domain.Entities;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
+using Translate.Domain.Contracts;
+using Translate.Domain.Entities;
 
 namespace Translate.Business
 {
@@ -90,7 +89,5 @@ namespace Translate.Business
         {
             return _exceptionHandler.Run(() => _translationClient.GetLanguageCodes());
         }
-
-
     }
 }

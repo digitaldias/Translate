@@ -197,7 +197,6 @@ namespace Translate.Business.Tests
         }
 
 
-
         [Fact]
         public void DetectLanguage_ClientThrowsException_IsHandledByExceptionHandler()
         {

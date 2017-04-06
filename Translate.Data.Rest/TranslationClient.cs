@@ -2,21 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
+using System.Xml.Linq;
 using Translate.Domain.Contracts;
 using Translate.Domain.Entities;
-using System;
-using System.Xml.Linq;
 
 namespace Translate.Business
 {
     public class TranslationClient : ITranslationClient
     {
-        private static string TRANSLATION_API_URL = "https://api.microsofttranslator.com/v2/http.svc";
-        private RestClient                  _restClientTranslation;
+        private static string            TRANSLATION_API_URL = "https://api.microsofttranslator.com/v2/http.svc";
+        private RestClient               _restClientTranslation;
+        private readonly ITokenRefresher _tokenRefresher;
+        private ILogger                  _logger;
 
-        private readonly ITokenRefresher    _tokenRefresher;
-
-        private ILogger                     _logger;
 
         public TranslationClient(ILogger logger, ITokenRefresher tokenRefresher)
         {
@@ -45,6 +44,12 @@ namespace Translate.Business
         }
 
 
+        public async Task<string> TranslateSingleAsync(string from, string to, string untranslated)
+        {
+            return await Task.Run(() => TranslateSingle(from, to, untranslated));
+        }
+
+
         public IEnumerable<Language> GetLanguageCodes()
         {
             var request = CreateAuthorizedRequest("GetLanguagesForTranslate", Method.GET);            
@@ -55,6 +60,12 @@ namespace Translate.Business
                 return result.Data.Select(s => new Language { Code = s });                
             }
             return new List<Language>();
+        }
+
+
+        public async Task<IEnumerable<Language>> GetLanguageCodesAsync()
+        {
+            return await Task.Run(() => GetLanguageCodes());
         }
 
 
@@ -70,6 +81,12 @@ namespace Translate.Business
                 return new Language { Code = xml.Value};
             }
             return null;
+        }
+
+
+        public async Task<Language> DetectLanguageAsync(string text)
+        {
+            return await Task.Run(() => DetectLanguage(text));
         }
 
 

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Translate.Domain.Entities;
 
 namespace Translate.Domain.Contracts
@@ -7,8 +8,14 @@ namespace Translate.Domain.Contracts
     {
         string TranslateSingle(string from, string to, string untranslated);
 
+        Task<string> TranslateSingleAsync(string from, string to, string untranslated);
+
         IEnumerable<Language> GetLanguageCodes();
 
+        Task<IEnumerable<Language>> GetLanguageCodesAsync();
+
         Language DetectLanguage(string text);
+
+        Task<Language> DetectLanguageAsync(string text);
     }
 }
