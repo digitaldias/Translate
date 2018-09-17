@@ -1,24 +1,26 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Xml.Linq;
 using Translate.Domain.Contracts;
+using Translate.Domain.Contracts.Validators;
 using Translate.Domain.Entities;
 
 namespace Translate.Business
 {
     public class TranslationService : ITranslationService
     {
-        private readonly IExceptionHandler               _exceptionHandler;
-        private readonly ITranslationClient              _translationClient;
-        private Dictionary<string, Language>             _supportedLanguages;
-        private readonly ILogger                         _logger;
+        private readonly IExceptionHandler            _exceptionHandler;
+        private readonly ITranslationRequestValidator _translationRequestValidator;
+        private readonly ITranslationClient           _translationClient;
+        private Dictionary<string, Language>          _supportedLanguages;
+        private readonly ILogger                      _logger;
 
 
-        public TranslationService(IExceptionHandler exceptionHandler, ITranslationClient translationClient, ILogger logger)
+        public TranslationService(IExceptionHandler exceptionHandler, ITranslationRequestValidator translationRequestValidator, ITranslationClient translationClient, ILogger logger)
         {
-            _exceptionHandler               = exceptionHandler;
-            _translationClient              = translationClient;
-            _logger                         = logger;
+            _exceptionHandler            = exceptionHandler;
+            _translationRequestValidator = translationRequestValidator;
+            _translationClient           = translationClient;
+            _logger                      = logger;
         }
 
 
@@ -35,37 +37,19 @@ namespace Translate.Business
         }
 
 
-        public string TranslateSingle(string from, string to, string text)
+        public string TranslateSingle(TranslationRequest translationRequest)
         {
-            if (string.IsNullOrEmpty(from) || string.IsNullOrEmpty(to) || string.IsNullOrEmpty(text))
+            if(!_translationRequestValidator.IsValid(translationRequest))
             {
-                _logger.LogError("TranslateSingle(from, to, text) has one or more empty parameters. All 3 are required");
-                return string.Empty;
-            }
-
-            if (!SupportedLanguages.Values.Any(l => l.Code == from))
-            {
-                _logger.LogError($"Paramameter 'from' used invalid language code '{from}'");
-                return string.Empty;
-            }
-
-            if (!SupportedLanguages.Values.Any(l => l.Code == to))
-            {
-                _logger.LogError($"Paramameter 'to' used invalid language code '{to}'");
+                _logger.LogError("Received an invalid Translation request object");
                 return string.Empty;
             }
             return _exceptionHandler.Run(() =>
             {
-                var translatedResult = _translationClient.TranslateSingle(from, to, text);
-                var xmlElement = XElement.Parse(translatedResult);
+                var translatedResult = _translationClient.TranslateSingle(translationRequest);
+                var xmlElement       = XElement.Parse(translatedResult);
                 return xmlElement.Value;
             });        
-        }
-
-
-        public string TranslateSingle(Language from, Language to, string text)
-        {
-            return TranslateSingle(from.Code, to.Code, text);
         }
 
 

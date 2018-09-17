@@ -16,11 +16,8 @@ namespace Translate.Domain.Contracts
         /// <summary>
         /// Translate a single piece of text
         /// </summary>
-        /// <param name="from">Language to translate from</param>
-        /// <param name="to">Language to translate to</param>
-        /// <param name="text">the text to be translated</param>
         /// <returns>Translated string</returns>
-        string TranslateSingle(Language from, Language to, string text);
+        string TranslateSingle(TranslationRequest translationRequest);
 
 
         /// <summary>

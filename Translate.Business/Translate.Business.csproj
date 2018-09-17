@@ -47,6 +47,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SettingsReader.cs" />
     <Compile Include="TranslationService.cs" />
+    <Compile Include="Validators\LanguageValidator.cs" />
+    <Compile Include="Validators\TranslationRequestValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -57,8 +59,6 @@
       <Name>Translate.Domain</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Validators\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

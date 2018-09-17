@@ -6,9 +6,9 @@ namespace Translate.Domain.Contracts
 {
     public interface ITranslationClient
     {
-        string TranslateSingle(string from, string to, string untranslated);
+        string TranslateSingle(TranslationRequest translationRequest);
 
-        Task<string> TranslateSingleAsync(string from, string to, string untranslated);
+        Task<string> TranslateSingleAsync(TranslationRequest translationRequest);
 
         IEnumerable<Language> GetLanguageCodes();
 

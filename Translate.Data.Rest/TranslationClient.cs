@@ -25,13 +25,13 @@ namespace Translate.Business
         }
 
 
-        public string TranslateSingle(string from, string to, string untranslated)
+        public string TranslateSingle(TranslationRequest translationRequest)
         {            
             var request = CreateAuthorizedRequest("Translate", Method.GET);
 
-            request.AddParameter("from", from);
-            request.AddParameter("to", to);
-            request.AddParameter("text", untranslated);
+            request.AddParameter("from", translationRequest.From.Code);
+            request.AddParameter("to"  , translationRequest.To.Code);
+            request.AddParameter("text", translationRequest.Text);
             
             request.AddHeader("accept", "application/xml");
 
@@ -44,9 +44,9 @@ namespace Translate.Business
         }
 
 
-        public async Task<string> TranslateSingleAsync(string from, string to, string untranslated)
+        public async Task<string> TranslateSingleAsync(TranslationRequest translationRequest)
         {
-            return await Task.Run(() => TranslateSingle(from, to, untranslated));
+            return await Task.Run(() => TranslateSingle(translationRequest));
         }
 
 

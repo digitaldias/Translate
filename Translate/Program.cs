@@ -3,6 +3,7 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 using Translate.Domain.Contracts;
+using Translate.Domain.Entities;
 using Translate.IoC;
 
 namespace Translate
@@ -63,7 +64,13 @@ namespace Translate
 
             // Translate into norwegian            
             var norwegian        = supportedLanguages["no"];
-            var translatedResult = _translationService.TranslateSingle(from: detectedLanguage, to: norwegian, text: textToTranslate);            
+            var translationRequest = new TranslationRequest
+            {
+                From = detectedLanguage,
+                To = norwegian,
+                Text = textToTranslate
+            };
+            var translatedResult = _translationService.TranslateSingle(translationRequest);            
             WriteAndResetStopwatch(translatedResult);
 
 
