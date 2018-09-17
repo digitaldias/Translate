@@ -36,6 +36,7 @@ IEnumerable<int> BreakSentences(Language language, string text)
    {
         public Language From { get; set; }
         public Language To   { get; set; }
+        public string   Text { get; set; }
    }
 ```
 
