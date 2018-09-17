@@ -3,7 +3,6 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 using Translate.Domain.Contracts;
-using Translate.Domain.Entities;
 using Translate.IoC;
 
 namespace Translate
@@ -67,12 +66,6 @@ namespace Translate
             var translatedResult = _translationService.TranslateSingle(from: detectedLanguage, to: norwegian, text: textToTranslate);            
             WriteAndResetStopwatch(translatedResult);
 
-
-            // Add a known translation to help Translator get it right
-            var english = new Language { Code = "en" };
-            var norwegianSentence  = "Per var så fattig at han eide ikke nåla på kroppen";
-            var englishTranslation = "Pål was so poor that he didn't have a penny to his name";
-            WriteAndResetStopwatch("Add translation with result: " + _translationService.AddTranslation(norwegian, english, norwegianSentence, englishTranslation, "pedro@digitaldias.com"));
 
             // End of program
             Console.WriteLine("Done. Press any key to finish");

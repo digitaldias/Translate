@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using Translate.Domain.Contracts;
@@ -9,18 +8,19 @@ namespace Translate.Business
 {
     public class TranslationService : ITranslationService
     {
-        private readonly IExceptionHandler _exceptionHandler;
-        private readonly ITranslationClient _translationClient;
-        private Dictionary<string, Language> _supportedLanguages;
-        private readonly ILogger _logger;
+        private readonly IExceptionHandler               _exceptionHandler;
+        private readonly ITranslationClient              _translationClient;
+        private Dictionary<string, Language>             _supportedLanguages;
+        private readonly ILogger                         _logger;
 
 
         public TranslationService(IExceptionHandler exceptionHandler, ITranslationClient translationClient, ILogger logger)
         {
-            _exceptionHandler  = exceptionHandler;
-            _translationClient = translationClient;
-            _logger            = logger;
+            _exceptionHandler               = exceptionHandler;
+            _translationClient              = translationClient;
+            _logger                         = logger;
         }
+
 
         public Language DetectLanguage(string text)
         {
@@ -92,41 +92,6 @@ namespace Translate.Business
                 return null;
 
             return _exceptionHandler.Run(() => _translationClient.BreakSentences(textLanguage, text));
-        }
-
-
-        public bool AddTranslation(Language from, Language to, string originalText, string translatedText, string userName)
-        {
-            if (from == null || to == null)
-            {
-                _logger.LogError("FROM and TO languages cannot be null. They're both required");
-                return false;
-            }
-
-            if (string.IsNullOrEmpty(originalText) || string.IsNullOrEmpty(translatedText))
-            {
-                _logger.LogError("Input texts cannot be empty");
-                return false;
-            }
-
-            if(string.IsNullOrEmpty(userName))
-            {
-                _logger.LogError("The userName cannot be null");
-                return false;
-            }
-
-            if (originalText.Length > 1000)
-            {
-                _logger.LogError("Original text cannot exceed 1000 characters");
-                return false;
-            }
-
-            if (translatedText.Length > 2000)
-            {
-                _logger.LogError("Translated text cannot exceed 2000 characters");
-                return false;
-            }
-            return _exceptionHandler.Run(() => _translationClient.AddTranslation(from, to, originalText, translatedText, userName));
         }
 
 

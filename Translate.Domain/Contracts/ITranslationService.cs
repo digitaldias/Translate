@@ -1,5 +1,5 @@
-﻿using Translate.Domain.Entities;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Translate.Domain.Entities;
 
 namespace Translate.Domain.Contracts
 {
@@ -37,18 +37,5 @@ namespace Translate.Domain.Contracts
         /// <param name="text">The text to analyze</param>
         /// <returns>Enumerable of ints where each represents the character length of each sentence</returns>
         IEnumerable<int> BreakSentences(Language textLanguage, string text);
-
-
-        /// <summary>
-        /// Provides a way to give Translation API a better translation for 
-        /// a common text. 
-        /// </summary>
-        /// <param name="from">Language to translate from</param>
-        /// <param name="to">Language to translate to</param>
-        /// <param name="originalText">Max. 1000 characters</param>
-        /// <param name="translatedText">Max. 2000 characters</param>
-        /// <param name="userName">A string used to track the originator of the submission</param>
-        /// <returns>True if accepted. False otherwise. See ErrorLog for details on fail</returns>
-        bool AddTranslation(Language from, Language to, string originalText, string translatedText, string userName);
     }
 }

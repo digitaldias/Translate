@@ -47,6 +47,7 @@
     <Compile Include="Contracts\ITokenRefresher.cs" />
     <Compile Include="Contracts\ITranslationClient.cs" />
     <Compile Include="Contracts\ITranslationService.cs" />
+    <Compile Include="Contracts\Validators\IValidator.cs" />
     <Compile Include="Entities\Language.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
