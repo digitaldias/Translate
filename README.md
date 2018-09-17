@@ -11,7 +11,7 @@ The list of API methods can be found [here](http://docs.microsofttranslator.com/
 ### Methods and properties
 ```csharp
 // Translate text from one language to another
-string TranslateSingle(Language from, Language to, string text)
+string TranslateSingle(TranslationRequest)
 
 // Dictionary of supported languages, populated during startup
 Dictionary<string,Language> SupportedLanguages { get; }
@@ -22,12 +22,6 @@ Language DetectLanguage(string text)
 // Break a text up into sentences and then return the character length for each sentence
 IEnumerable<int> BreakSentences(Language language, string text)
 
-// Add a known translation into the memory of the translation service
-bool AddTranslation(Language from, Language to, string originalText, string translatedText);
-
-// Provides a way to give the Translation API a better translation.  The userName is required 
-// to track the originator of the translation
-bool AddTranslation(Language from, Language to, string originalText, string translatedText, string userName);
 ```
 
 ### Entities
@@ -36,6 +30,12 @@ bool AddTranslation(Language from, Language to, string originalText, string tran
    {
         public string Name { get; set; }
         public string Code { get; set; }
+   }
+   
+   public class TranslationRequest
+   {
+        public Language From { get; set; }
+        public Language To   { get; set; }
    }
 ```
 
