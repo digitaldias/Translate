@@ -1,3 +1,5 @@
+[![BCH compliance](https://bettercodehub.com/edge/badge/digitaldias/Translate?branch=master)](https://bettercodehub.com/)
+
 # Translate
 This repository defines  the **TranslationService** and includes a sample console application to translate text between all supported languages of the [Microsoft Cognitive Translation API](https://www.microsoft.com/cognitive-services/en-us/translator-api)
 
